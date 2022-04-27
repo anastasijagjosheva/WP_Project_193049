@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Gift Shop</title>
+    <link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/roboto.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/material.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/ripples.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{assets/css/slider.css}">
+
+
+<body ng-app="learn">
+
+<div class="container-fluid">
+
+    <header class="shado-1">
+        <div class="container container-head">
+            <i class="fa fa-gift"></i>
+            <h1>Gift Shop </h1>
+            <nav class="hidden-xs">
+                <ul>
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">Logout</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+
+                            <th:block th:if="${#request.getRemoteUser() != null}"
+                                      th:text="${#request.getRemoteUser()}"></th:block>
+
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/orders">Orders</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/shopping-cart">Shopping Cart</a>
+                    </li>
+
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </li>
+
+                    <li >
+                        <a href="/categories">Categories</a>
+                    </li>
+
+                </ul>
+            </nav>
+            <i data-toggle="modal" data-target="#mu" class="fa visible-xs fa-list lkd"></i>
+
+            <div id="mu" class="card mob-menu">
+                <ul>
+                    <li>
+                        <a href="/categories">Categories</a>
+                    </li>
+
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/shopping-cart">Shopping Cart</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/orders">Orders</a>
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+
+                            <th:block th:if="${#request.getRemoteUser() != null}"
+                                      th:text="${#request.getRemoteUser()}"></th:block>
+
+                    </li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a href="/logout">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+    <!-- *************************End of Header ********************** -->
+
+    <div class="nav-path m-adbu-cnt">
+        <div class="container">
+            <p>Categories</p>
+        </div>
+    </div>
+
+    <div style="margin-top:10px;" ng-controller="homeCtrl" class="homeontainer">
+
+
+        <div class="container">
+            <div class="row se-ti">
+                <h2 class="section-title"><span>Categories</span></h2>
+            </div>
+
+            <div class="row all-features">
+                <div class="col-sm-3 ff-pc" th:each="category: ${categories}">
+                    <div class="f-content card f-con-r1">
+                        <img style="height:240px;" th:src="${category.imageCategory}"/>
+                        </br>
+                        <h2><th:block th:text="${category.name}"/><th:block></h2>
+                            </br>
+                            <form action="/products" method="GET">
+                                <input type="hidden"
+                                       class="form-control"
+                                       id="categoryId"
+                                       name="categoryId"
+                                       th:value="(${category} != null ? ${category.getId()} : '')">
+                                <button type="submit" class="btn btn-primary">Choose</button>
+                            </form>
+
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- *************************End of Body ********************** -->
+
+<footer style="margin-top:25px;">
+    <input type="hidden" value="<?php echo base_url() ?>" id="url">
+    <div class="container foot-cont">
+        <div class="col-sm-4">
+            <b>About Us</b>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur.
+            </p>
+        </div>
+        <div class="col-sm-3">
+            <b>Address</b>
+
+            <p style="font-size:15px;">No 26/6, Partizanski Odredi<br>
+                Skopje, Macedonia <br>
+                Skopje – 1000 <br>
+                email:info@example.com <br>
+            </p>
+
+        </div>
+
+        <div class="col-sm-5 scmsug">
+            <div class="row">
+                <b style="text-align:center; width:100%; margin-left:30%;">Useful Links</b>
+            </div>
+
+            <div class="col-sm-6 center">
+                <p><a>Features</a></p>
+                <p><a>Parent Demo</a></p>
+                <p><a>Staff Demo</a></p>
+                <p><a>Student Demo</a></p>
+                <p><a>Admin Demo</a></p>
+
+            </div>
+
+            <div class="col-sm-6 center">
+
+                <p><a>Contact Us</a></p>
+                <p><a>Support</a></p>
+                <p><a>Why Us</a></p>
+                <p><a>About Us</a></p>
+                <p><a>ALl Features</a></p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class=" smarti">
+        <div class="container">
+            <p>All Rights Reserved &copy; Gift Shop | Designed &amp; Developed By Anastasija Gjosheva
+
+                <i class="fa fa-twitter fico-s hidden-xs"></i>
+                <i class="fa fa-pinterest-p fico-s hidden-xs"></i>
+                <i class="fa fa-google-plus fico-s hidden-xs"></i>
+                <i class="fa fa-facebook fico-s hidden-xs"></i>
+
+
+            </p>
+
+
+        </div>
+    </div>
+
+</footer>
+
+
+<!-- *************************End of Footer ********************** -->
+
+</div>
+
+<script th:src="@{assets/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{assets/js/angular.min.js}"></script>
+<script th:src="@{assets/js/angular-ui-router.min.js}"></script>
+<script th:src="@{assets/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/js/ripples.min.js}"></script>
+<script th:src="@{assets/js/material.min.js}"></script>
+<script th:src="@{assets/js/modernizr.custom.28468.js}"></script>
+<script th:src="@{assets/js/jquery.cslider.js}"></script>
+<script th:src="@{assets/js/script.js}"></script>
+<script th:src="@{app/app.js}"></script>
+<script th:src="@{app/directives.js}"></script>
+
+<script>
+    $(document).ready(function () {
+        $.material.init();
+    });
+</script>
+
+
+</body>
+</html>
